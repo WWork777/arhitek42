@@ -15,6 +15,186 @@
       }
 }
 
+.footer_copyright {
+  position: absolute;
+  bottom: 40px;
+  @media (max-width:992px) {
+    bottom: 90px;
+  }
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  
+  a {
+    font-size: 16px;
+    color: #FFFFFF !important;
+    margin: 0;
+    font-weight: 400;
+
+    span{
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 600px) {
+      font-size: 14px;
+    }
+  }
+}
+
+// Блок о разработчике
+.developerBlock {
+  position: relative;
+  width: 90%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 30px 0 0px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 10;
+
+  @media (max-width: 1024px) {
+    width: 90%;
+    padding: 25px 0 0;
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px 0 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 15px 0 0;
+    margin-bottom: 100px;
+  }
+}
+
+.developerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.developerLabel {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
+}
+
+.developerLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--secondary-button-color);
+    transform: translateY(-2px);
+
+    .developerName {
+      color: var(--secondary-button-color);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 12px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 6px 12px;
+    gap: 8px;
+  }
+}
+
+// .developerLogoWrapper {
+//   background: rgba(255, 255, 255, 0.1);
+//   padding: 6px;
+//   border-radius: 50%;
+//   transition: all 0.3s ease;
+//   flex-shrink: 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+//   @media (max-width: 480px) {
+//     padding: 4px;
+//   }
+// }
+
+.developerLogo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+
+  @media (max-width: 768px) {
+    height: 24px;
+  }
+
+  @media (max-width: 480px) {
+    height: 40px;
+  }
+}
+
+.developerInfo {
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 480px) {
+    max-width: 180px;
+  }
+}
+
+.developerName {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
+}
+
+.developerDescription {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+
+  @media (max-width: 768px) {
+    font-size: 0.65rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
+}
+
 footer{
     position: relative;
     display: flex;

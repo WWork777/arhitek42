@@ -128,7 +128,19 @@ export default function Footer() {
               </svg>
             </button>
           </div>
+
+          {/* Добавленная строка с копирайтом */}
+          <div className="footer_copyright">
+            <a href="https://virlab42.ru">Сайт разработан компанией <span>Вирлаб</span></a>
+          </div>
+
+          
         </div>
+
+        
+
+
+        
       </footer>
     </>
   );
