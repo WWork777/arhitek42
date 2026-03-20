@@ -97,7 +97,7 @@ export default function ModalForm() {
                   </div>
                 </button>
 
-                <button className="btn btn-telegram" onClick={handleTelegram}>
+                {/* <button className="btn btn-telegram" onClick={handleTelegram}>
                   <div className="btn-icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ export default function ModalForm() {
                     <span className="btn-title">Telegram</span>
                     <span className="btn-description">Написать сообщение</span>
                   </div>
-                </button>
+                </button> */}
                 <button className="btn btn-telegram" onClick={handleVk}>
                   <div className="btn-icon">
                     <svg

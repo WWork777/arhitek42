@@ -95,7 +95,7 @@ function Consultation() {
                   </div>
                 </button>
 
-                <button
+                {/* <button
                   className="btn-consultation btn-telegram btn"
                   onClick={handleTelegram}
                 >
@@ -116,7 +116,7 @@ function Consultation() {
                     <span className="btn-title">Telegram</span>
                     <span className="btn-description">Написать сообщение</span>
                   </div>
-                </button>
+                </button> */}
                 <button
                   className="btn-consultation btn-telegram btn"
                   onClick={handleVk}
