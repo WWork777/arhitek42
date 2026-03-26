@@ -123,13 +123,12 @@ export default function ProjectModalForm() {
                     Нажимая на кнопку “отправить заявку”, я соглашаюсь с
                     условиями{" "}
                     <a
-                      href="#"
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#сonfidentiality"
-                    >
-                      политики конфиденциальности
-                    </a>
+                        href="/docs/ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ АРХИТЕК 42.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        политики конфиденциальности
+                      </a>
                   </span>
                 </div>
                 <div className="modal-footer">
