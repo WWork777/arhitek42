@@ -1,4 +1,5 @@
 "use client";
+import { PatternFormat } from "react-number-format";
 import { useState, useEffect } from "react";
 import "./Consultation.scss";
 import React from "react";
@@ -27,17 +28,21 @@ function Consultation() {
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [status, setStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Проверка на заполненность телефона (чтобы не ушли только подчеркивания)
+    if (formData.phone.includes("_") || formData.phone === "") {
+      setStatus("Пожалуйста, введите корректный номер телефона");
+      return;
+    }
+
     setIsSubmitting(true);
     setStatus("");
 
@@ -54,20 +59,12 @@ function Consultation() {
         setStatus("Заявка успешно отправлена!");
         alert("Заявка успешно отправлена!");
         setFormData({ name: "", phone: "" });
-
-        setTimeout(() => {
-          const modal = bootstrap.Modal.getInstance(
-            document.getElementById("exampleModal")
-          );
-          modal?.hide();
-          setStatus("");
-        }, 3000); // Закрыть модалку через 3 секунды
+        // ... логика закрытия модалки
       } else {
-        setStatus("Ошибка при отправке. Попробуйте снова.");
+        setStatus("Ошибка при отправке.");
       }
     } catch (error) {
-      console.error(error);
-      setStatus("Ошибка при отправке. Попробуйте снова.");
+      setStatus("Ошибка при отправке.");
     } finally {
       setIsSubmitting(false);
     }
@@ -178,17 +175,28 @@ function Consultation() {
                         <label>Имя</label>
                       </div>
                       <div className="group">
-                        <input
-                          type="tel"
+                        <PatternFormat
+                          format="+7 (###) ###-##-##"
+                          mask="_"
                           name="phone"
                           value={formData.phone}
-                          onChange={handleChange}
-                          // placeholder="Телефон"
-                          pattern="^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$"
+                          allowEmptyFormatting={true}
+                          // Используем onValueChange правильно
+                          onValueChange={(values) => {
+                            setFormData((prev) => ({
+                              ...prev,
+                              phone: values.formattedValue, // сохраняем красивый отформатированный номер
+                            }));
+                          }}
+                          // Чтобы не слетал фокус и работали стили
+                          className="phone-input" 
+                          autoComplete="tel"
                           required
+                          placeholder=""
                         />
                         <span className="bar"></span>
-                        <label>Телефон</label>
+                        {/* Класс active поможет, если лейбл должен подняться при наличии текста */}
+                        <label className={formData.phone ? "active" : ""}>Телефон</label>
                       </div>
                     </div>
                     
