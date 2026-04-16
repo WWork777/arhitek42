@@ -7,7 +7,9 @@ export default function ProjectModalForm() {
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [status, setStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [modalTitle, setModalTitle] = useState("Узнать стоимость строительства");
+  const [modalTitle, setModalTitle] = useState(
+    "Узнать стоимость строительства",
+  );
 
   useEffect(() => {
     const modalElement = document.getElementById("exampleModa2");
@@ -53,20 +55,24 @@ export default function ProjectModalForm() {
         body: JSON.stringify({
           ...formData,
           // Добавляем +7 перед отправкой, если номер введен
-          phone: formData.phone ? `+7${formData.phone}` : ""
+          phone: formData.phone ? `+7${formData.phone}` : "",
         }),
       });
 
       const result = await response.json();
 
       if (result.success) {
+        if (typeof window !== "undefined" && typeof window.ym !== "undefined") {
+          window.ym(98007197, "reachGoal", "formHero");
+        }
+
         setStatus("Заявка успешно отправлена!");
         alert("Заявка успешно отправлена!");
         setFormData({ name: "", phone: "" });
 
         setTimeout(() => {
           const modal = bootstrap.Modal.getInstance(
-            document.getElementById("exampleModal")
+            document.getElementById("exampleModal"),
           );
           modal?.hide();
           setStatus("");
@@ -119,23 +125,23 @@ export default function ProjectModalForm() {
                   </div>
                   <div className="group">
                     <PatternFormat
-                        format="+7 (###) ###-##-##"
-                        mask="_"
-                        name="phone"
-                        value={formData.phone}
-                        allowEmptyFormatting={true}
-                        onValueChange={(values) => {
-                          setFormData((prev) => ({
-                            ...prev,
-                            phone: values.value, // сохраняем только цифры без +7
-                          }));
-                        }}
-                        // Чтобы не слетал фокус и работали стили
-                        className="phone-input"
-                        autoComplete="tel"
-                        required
-                        placeholder=""
-                      />
+                      format="+7 (###) ###-##-##"
+                      mask="_"
+                      name="phone"
+                      value={formData.phone}
+                      allowEmptyFormatting={true}
+                      onValueChange={(values) => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          phone: values.value, // сохраняем только цифры без +7
+                        }));
+                      }}
+                      // Чтобы не слетал фокус и работали стили
+                      className="phone-input"
+                      autoComplete="tel"
+                      required
+                      placeholder=""
+                    />
                     <span className="bar"></span>
                     <label>Телефон</label>
                   </div>
@@ -143,12 +149,12 @@ export default function ProjectModalForm() {
                     Нажимая на кнопку “отправить заявку”, я соглашаюсь с
                     условиями{" "}
                     <a
-                        href="/docs/ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ АРХИТЕК 42.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        политики конфиденциальности
-                      </a>
+                      href="/docs/ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ АРХИТЕК 42.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      политики конфиденциальности
+                    </a>
                   </span>
                 </div>
                 <div className="modal-footer">

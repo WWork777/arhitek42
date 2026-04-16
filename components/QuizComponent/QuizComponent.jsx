@@ -103,12 +103,16 @@ const QuizComponent = () => {
     setIsSubmitting(true);
     setStatus("");
 
-    const tech = technologies.find((t) => t.id === selectedTech)?.name || "Не указано";
-    const floors = floorOptions.find((f) => f.id === selectedFloors)?.name || "Не указано";
-    const timing = timingOptions.find((t) => t.id === selectedTiming)?.name || "Не указано";
-    const size = dimensions.length && dimensions.width
-      ? `${dimensions.length}м x ${dimensions.width}м`
-      : "Не указано";
+    const tech =
+      technologies.find((t) => t.id === selectedTech)?.name || "Не указано";
+    const floors =
+      floorOptions.find((f) => f.id === selectedFloors)?.name || "Не указано";
+    const timing =
+      timingOptions.find((t) => t.id === selectedTiming)?.name || "Не указано";
+    const size =
+      dimensions.length && dimensions.width
+        ? `${dimensions.length}м x ${dimensions.width}м`
+        : "Не указано";
 
     const details = `🏠 Технология: ${tech}\n🏢 Этажность: ${floors}\n📏 Размеры: ${size}\n⏳ Сроки: ${timing}`;
 
@@ -116,23 +120,30 @@ const QuizComponent = () => {
       const response = await fetch("/api/send-telegram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, details, phone: formData.phone ? `+7${formData.phone}` : ""}),
+        body: JSON.stringify({
+          ...formData,
+          details,
+          phone: formData.phone ? `+7${formData.phone}` : "",
+        }),
       });
 
       const result = await response.json();
 
       if (result.success) {
+        if (typeof window !== "undefined" && typeof window.ym !== "undefined") {
+          window.ym(98007197, "reachGoal", "Quiz");
+        }
         setStatus("Заявка успешно отправлена!");
         alert("Заявка успешно отправлена!");
         setFormData({ name: "", phone: "" });
-        
+
         setTimeout(() => {
-           setCurrentStep(0);
-           setSelectedTech(null);
-           setSelectedFloors(null);
-           setDimensions({ length: "", width: "" });
-           setSelectedTiming(null);
-           setStatus("");
+          setCurrentStep(0);
+          setSelectedTech(null);
+          setSelectedFloors(null);
+          setDimensions({ length: "", width: "" });
+          setSelectedTiming(null);
+          setStatus("");
         }, 3000);
       } else {
         setStatus("Ошибка при отправке. Попробуйте снова.");
@@ -321,12 +332,22 @@ const QuizComponent = () => {
             </div>
             <p className={styles.privacyText}>
               Нажимая на кнопку, вы соглашаетесь с{" "}
-              <a href="#" data-bs-toggle="modal" data-bs-target="#сonfidentiality">
+              <a
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#сonfidentiality"
+              >
                 политикой конфиденциальности
               </a>
             </p>
             {status && (
-              <p style={{ textAlign: "center", color: status.includes("успешно") ? "green" : "red", marginTop: "10px" }}>
+              <p
+                style={{
+                  textAlign: "center",
+                  color: status.includes("успешно") ? "green" : "red",
+                  marginTop: "10px",
+                }}
+              >
                 {status}
               </p>
             )}

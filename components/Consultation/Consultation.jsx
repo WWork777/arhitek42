@@ -13,7 +13,7 @@ function Consultation() {
   const handleWhatsApp = () => {
     window.open(
       "https://max.ru/u/f9LHodD0cOJRtuggQMOzpRNL_nNU-UmfUsIFVsCkyA29ihOmzySYtogrmNo",
-      "_blank"
+      "_blank",
     );
   };
 
@@ -36,7 +36,7 @@ function Consultation() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Проверка на заполненность телефона (чтобы не ушли только подчеркивания)
     if (formData.phone.includes("_") || formData.phone === "") {
       setStatus("Пожалуйста, введите корректный номер телефона");
@@ -53,13 +53,17 @@ function Consultation() {
         body: JSON.stringify({
           ...formData,
           // Добавляем +7 перед отправкой, если номер введен
-          phone: formData.phone ? `+7${formData.phone}` : ""
+          phone: formData.phone ? `+7${formData.phone}` : "",
         }),
       });
 
       const result = await response.json();
 
       if (result.success) {
+        if (typeof window !== "undefined" && typeof window.ym !== "undefined") {
+          window.ym(98007197, "reachGoal", "ConsultationForm");
+        }
+
         setStatus("Заявка успешно отправлена!");
         alert("Заявка успешно отправлена!");
         setFormData({ name: "", phone: "" });
@@ -199,10 +203,12 @@ function Consultation() {
                         />
                         <span className="bar"></span>
                         {/* Класс active поможет, если лейбл должен подняться при наличии текста */}
-                        <label className={formData.phone ? "active" : ""}>Телефон</label>
+                        <label className={formData.phone ? "active" : ""}>
+                          Телефон
+                        </label>
                       </div>
                     </div>
-                    
+
                     <span className="conf">
                       Нажимая на кнопку “отправить заявку”, я соглашаюсь с
                       условиями{" "}
